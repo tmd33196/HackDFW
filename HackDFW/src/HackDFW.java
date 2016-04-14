@@ -1,11 +1,13 @@
+/*
+* This is the main file of the program
+*/
 
-public class HackDFW {
+public class HackDFW
+{
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public static void main(String[] args) 
+    {
+        
     }
     
 }
