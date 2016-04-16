@@ -35,7 +35,6 @@ public class GoBoard
      * @return 0 = Stone sucessfully placed.
      *         1 = Position occupied
      *         2 = Suicide rule violation
-     *         3 = Ko rule violation
     */
     public int placeStone(int color, Point location)
     {
