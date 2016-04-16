@@ -10,7 +10,7 @@ public class HackDFW
 {
 
     public static void main(String[] args) throws IOException
-    {
+    {   
         Scanner sc = new Scanner(System.in); //Scanner for user input
         int size; //The size of the board
         
