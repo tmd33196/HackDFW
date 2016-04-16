@@ -32,9 +32,12 @@ public class GoBoard
      * stone have liberties. If not, the captured stones are removed. 
      * @param color - Color of stone.
      * @param position - Desired position of stone.
-     * return whether or not stone was placed. 
+     * @return 0 = Stone sucessfully placed.
+     *         1 = Position occupied
+     *         2 = Suicide rule violation
+     *         3 = Ko rule violation
     */
-    public boolean placeStone(int color, Point location)
+    public int placeStone(int color, Point location)
     {
         
     }
