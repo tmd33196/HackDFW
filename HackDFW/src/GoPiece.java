@@ -144,9 +144,9 @@ public class GoPiece
      * @param stone - The GoPiece implicit parameter is compared to
      * @return  whether or not stone is equal to implicit parameter
     */
-    public boolean equals(GoPiece stone)
+    public boolean nonObjectEquals(GoPiece stone)
     {
-        return (position.equals(stone.position) && (color == stone.color));
+        return (color == stone.color);
     }
 
 }
