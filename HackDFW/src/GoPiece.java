@@ -46,5 +46,15 @@ public class GoPiece
     
     //Returns if there are any liberties
     public boolean getHasLiberties() { return hasLiberties; }
+    
+    
+    /* Sets adjacent spots with desired value.
+     * @param adjacents - Array of desired adjacent values
+     * Author: Michael Nelson
+    */
+    public void setAdjacent(GoPiece[] adjacents)
+    {
+        adjacent = adjacents;
+    }
 
 }
