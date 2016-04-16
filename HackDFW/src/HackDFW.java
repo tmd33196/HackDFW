@@ -38,11 +38,10 @@ public class HackDFW
             if(!turn)
             {
                 p = p1.playTurn();
-                System.out.printf("Player 1 puts a piece at: %s\n", p.toString());
                 
                 if(p == null)
                 {
-                    if(passed = true)
+                    if(passed == true)
                     {
                         gameOver = true;
                         break;
@@ -55,16 +54,17 @@ public class HackDFW
                 else
                 {
                     board.placeStone(p1.getPlayerNumber(), p);
+                    System.out.printf("Player 1 puts a piece at: %s\n", p.toString());
+                    passed = false;
                 }
             }
             else
             {
                 p = p2.playTurn();
-                System.out.printf("Player 2 puts a piece at: %s\n", p.toString());
                 
                 if(p == null)
                 {
-                    if(passed = true)
+                    if(passed == true)
                     {
                         gameOver = true;
                         break;
@@ -77,8 +77,12 @@ public class HackDFW
                 else
                 {
                     board.placeStone(p1.getPlayerNumber(), p);
+                    System.out.printf("Player 2 puts a piece at: %s\n", p.toString());
+                    passed = false;
                 }
             }
+            
+            turn = turn ^ true;
         }
     }
     
