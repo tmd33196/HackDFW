@@ -40,53 +40,57 @@ public class GoBoard
     */
     public int placeStone(int color, Point position)
     {
-        int x = (int)position.getX();
-        int y = (int)position.getY();
+        int row = (int)position.getX();
+        int col = (int)position.getY();
         
-        if (board[x][y].getColor() == 0)
+        if (board[row][col].getColor() == 0)
         {
             GoPiece stone = new GoPiece(color, position);
             GoPiece[] adjacents = new GoPiece[4];
             
             // Fills array with adjacent pieces from board. If adjacent spot
             // is out of bounds, puts null instead.
-            if (y - 1 >= 0)
+            //Checks above
+            if (row - 1 >= 0)
             {
-                adjacents[0] = board[x][y - 1];
+                adjacents[0] = board[row - 1][col];
             }
             else 
             {
                 adjacents[0] = null;
             }
             
-            if (x + 1 < dimension)
+            //Checks right
+            if (col + 1 < dimension)
             {
-                adjacents[1] = board[x + 1][y];
+                adjacents[1] = board[row][col + 1];
             }
             else 
             {
                 adjacents[1] = null;
             }
             
-            if (y + 1 < dimension)
+            //Checks below
+            if (row + 1 < dimension)
             {
-                adjacents[2] = board[x][y + 1];
+                adjacents[2] = board[row + 1][col];
             }
             else 
             {
                 adjacents[2] = null;
             }
             
-            if (x - 1 >= 0)
+            //Checks left
+            if (col - 1 >= 0)
             {
-                adjacents[3] = board[x - 1][y];
+                adjacents[3] = board[row][col - 1];
             }
             else 
             {
                 adjacents[3] = null;
             }
             stone.setAdjacent(adjacents);
-            board[x][y] = stone;
+            board[row][col] = stone;
                     
             // Checks each adjacent enemy stone to see if they still have
             // liberties after stone placement. If not, they are captured and 
@@ -96,22 +100,21 @@ public class GoBoard
                 if(i != null)
                 {
                     i.updateLiberties();
-                
+                    
                     if (i.getColor() == -color && !(i.getHasLiberties()))
                     {
-                        System.out.println("Removing " + i);
                         removeCapturedStones(i);
                     }
                 }
             }
-            
+            stone.updateLiberties();
             if (stone.getHasLiberties())
             {
                 return 0;
             }
             else
             {
-                board[x][y] = new GoPiece(0, position);
+                board[row][col] = new GoPiece(0, position);
                 return 2;
             }
         }
@@ -144,11 +147,12 @@ public class GoBoard
     public String toString()
     {
         String theBoard = "";
-        for (int y =  dimension - 1; y >= 0; y--)
+        //for (int y =  dimension - 1; y >= 0; y--)
+        for(int row = 0; row < dimension; row ++)
         {
-            for (int x = 0; x < dimension; x++)
+            for (int col = 0; col < dimension; col++)
             {
-                theBoard = theBoard + board[x][y].getColor() + " ";
+                theBoard = theBoard + board[row][col] + " ";
             }
             theBoard = theBoard + "\n";
         }
