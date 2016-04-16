@@ -131,4 +131,21 @@ public class GoBoard
             }
         }
     }
+    
+    
+    /* Provides a string representation of the Go Board
+     * @return the string representation of Go Board. 
+    */
+    public String toString()
+    {
+        String theBoard = "";
+        for (int y =  dimension - 1; y >= 0; y--)
+        {
+            for (int x = 0; x < dimension; x++)
+            {
+                theBoard = theBoard + board[x][y] + " ";
+            }
+            theBoard = theBoard + "\n";
+        }
+    }
 }
