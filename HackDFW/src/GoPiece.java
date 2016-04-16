@@ -49,6 +49,16 @@ public class GoPiece
         adjacent = adjacents;
     }
     
+    
+    /* Returns the array of adjacent Go Pieces
+     * @return array of Go Pieces
+     * Author: Michael Nelson
+    */
+    public GoPiece[] getAdjacents()
+    {
+        return adjacent;
+    }
+    
     //Updates the liberties.  If any connected ally piece has a liberty then all have liberty
     public boolean updateLiberties()
     {
