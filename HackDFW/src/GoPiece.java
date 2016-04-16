@@ -73,11 +73,12 @@ public class GoPiece
                 //If the piece has not been checked then call on that piece
                 if(!piece.checked)
                     adjacentLiberties |= piece.updateLiberties(); //boolean or with the return of the adjacent piece
-                else //Else if has been checked, so just com
+                else //Else if has been checked, so just compare with the stored boolean value
                     adjacentLiberties |= piece.getHasLiberties();
             }
         }
         
+        //Set liberties, check is now false, returns
         setHasLiberties(adjacentLiberties);
         checked = false;
         return adjacentLiberties;
