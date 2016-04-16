@@ -19,6 +19,7 @@ public class GoBoard
     {
         this.dimension = dimension;
         board = new GoPiece[dimension][dimension];
+        this.positions = new Stack<GoPiece[][]>();
         // Populates board with empty stones
         for (int i = 0; i < dimension; i++)
         {
@@ -27,6 +28,7 @@ public class GoBoard
                 board[i][q] = new GoPiece(0, new Point(i, q));
             }
         }
+        positions.push(board);
     }
     
     
@@ -102,7 +104,6 @@ public class GoBoard
                 if(i != null)
                 {
                     i.updateLiberties();
-                    
                     if (i.getColor() == -color && !(i.getHasLiberties()))
                     {
                         removeCapturedStones(i);
@@ -112,7 +113,19 @@ public class GoBoard
             stone.updateLiberties();
             if (stone.getHasLiberties())
             {
-                return 0;
+                GoPiece[][] previousstate = positions.pop();
+                GoPiece[][] morepreviousstate = positions.pop();
+                if (morepreviousstate != board)
+                {
+                    positions.push(morepreviousstate);
+                    positions.push(previousstate);
+                    positions.push(board);
+                    return 0;
+                }
+                else
+                {
+                    return 3;
+                }
             }
             else
             {
