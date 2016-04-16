@@ -28,22 +28,56 @@ public class HackDFW
         Player p1 = new Player(1, size); //Creates player 1 with black pieces
         Player p2 = new Player(2, size); //Creates player 2 with white pieces
         boolean turn = false;//Who's turn it is, false = player 1, true = player 2
+        boolean passed = false; //If the last player passed
+        boolean gameOver = false; //If the game has ended
         
         //Infinit play loop
-        while(true)
+        while(!gameOver)
         {
             Point p;
             if(!turn)
             {
                 p = p1.playTurn();
-                System.out.printf("Player 1 puts a piece at: %s", p.toString());
-                board.placeStone(p1.getPlayerNumber(), p);
+                System.out.printf("Player 1 puts a piece at: %s\n", p.toString());
+                
+                if(p == null)
+                {
+                    if(passed = true)
+                    {
+                        gameOver = true;
+                        break;
+                    }
+                    else
+                    {
+                        passed = true;
+                    }
+                }
+                else
+                {
+                    board.placeStone(p1.getPlayerNumber(), p);
+                }
             }
             else
             {
                 p = p2.playTurn();
-                System.out.printf("Player 2 puts a piece at: %s", p.toString());
-                board.placeStone(p1.getPlayerNumber(), p);
+                System.out.printf("Player 2 puts a piece at: %s\n", p.toString());
+                
+                if(p == null)
+                {
+                    if(passed = true)
+                    {
+                        gameOver = true;
+                        break;
+                    }
+                    else
+                    {
+                        passed = true;
+                    }
+                }
+                else
+                {
+                    board.placeStone(p1.getPlayerNumber(), p);
+                }
             }
         }
     }
