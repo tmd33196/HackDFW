@@ -138,6 +138,15 @@ public class GoBoard
     }
     
     
+    /* Returns board as a 2-d array
+     * @return board instance field
+    */
+    public GoPiece[][] getBoard()
+    {
+        return board;
+    }
+    
+    
     /* Provides a string representation of the Go Board
      * @return the string representation of Go Board. 
     */
