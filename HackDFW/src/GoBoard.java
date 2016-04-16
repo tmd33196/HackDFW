@@ -93,6 +93,7 @@ public class GoBoard
             // removed.
             for (GoPiece i: adjacents)
             {
+                i.updateLiberties();
                 if (i.getColor() == -color && !(i.getHasLiberties()))
                 {
                     removeCapturedStones(i);
@@ -117,8 +118,17 @@ public class GoBoard
      * @param stone - The stone from which to recursively eliminate stones
      * with no liberties
     */
-    public void removeCapturedStones(GoPiece stone)
+    private void removeCapturedStones(GoPiece stone)
     {
-        
+        int color = stone.getColor();
+        stone.setColor(0);
+        GoPiece[] adjacents = stone.getAdjacents();
+        for (GoPiece i: adjacents)
+        {
+            if (i.getColor() == color)
+            {
+                removeCapturedStones(i);
+            }
+        }
     }
 }
