@@ -76,7 +76,7 @@ public class GoPiece
     public boolean updateLiberties()
     {
         if(color == 0) return false;
-        System.out.println("Beginning of updateLiberties" + position + " " + this.toString() + " " + hasLiberties);
+        //System.out.println("Beginning of updateLiberties" + position + " " + this.toString() + " " + hasLiberties);
         checked = true; //This piece has been checked
         boolean adjacentLiberties = false; //If there are any adjacent liberties
         setHasLiberties(adjacentLiberties);
@@ -89,10 +89,10 @@ public class GoPiece
         {
             adjacentLiberties = true;
             setHasLiberties(adjacentLiberties);
-            System.out.println("\tFound adjacent empty piece"   + (adjacent[0] != null && adjacent[0].getColor() == 0) 
-                                                                + (adjacent[1] != null && adjacent[1].getColor() == 0) 
-                                                                + (adjacent[2] != null && adjacent[2].getColor() == 0) 
-                                                                + (adjacent[3] != null && adjacent[3].getColor() == 0));
+            //System.out.println("\tFound adjacent empty piece"   + (adjacent[0] != null && adjacent[0].getColor() == 0) 
+            //                                                    + (adjacent[1] != null && adjacent[1].getColor() == 0) 
+            //                                                    + (adjacent[2] != null && adjacent[2].getColor() == 0) 
+            //                                                    + (adjacent[3] != null && adjacent[3].getColor() == 0));
         }
         
         //Loop through the 4 adjacent pieces
@@ -101,7 +101,7 @@ public class GoPiece
             //If they are from the same player
             if(piece != null && piece.color == this.color)
             {
-                System.out.println("\tThis piece is the same color: " + piece.position + " " + piece.toString() + " " + piece.hasLiberties);
+                //System.out.println("\tThis piece is the same color: " + piece.position + " " + piece.toString() + " " + piece.hasLiberties);
                 //If the piece has not been checked then call on that piece
                 if(!piece.checked)
                     adjacentLiberties |= piece.updateLiberties(); //boolean or with the return of the adjacent piece
@@ -113,7 +113,7 @@ public class GoPiece
         //Set liberties, check is now false, returns
         setHasLiberties(adjacentLiberties);
         checked = false;
-        System.out.println("End of updateLiberties " + position + " " + this.toString() + " " + hasLiberties);
+        //System.out.println("End of updateLiberties " + position + " " + this.toString() + " " + hasLiberties);
         return adjacentLiberties;
     }
     
