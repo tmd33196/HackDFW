@@ -6,6 +6,7 @@ import java.util.*;
 import java.awt.*;
 public class GoBoard 
 {   
+    private int dimension;
     private GoPiece[][] board;
     
     
@@ -15,6 +16,7 @@ public class GoBoard
     */
     public GoBoard(int dimension)
     {
+        dimension = this.dimension;
         board = new GoPiece[dimension][dimension];
         // Populates board with empty stones
         for (int i = 0; i < dimension; i++)
@@ -45,10 +47,44 @@ public class GoBoard
         {
             GoPiece stone = new GoPiece(color, position);
             GoPiece[] adjacents = new GoPiece[4];
-            adjacents[0] = board[x][y + 1];
-            adjacents[1] = board[x + 1][y];
-            adjacents[2] = board[x][y - 1];
-            adjacents[3] = board[x - 1][y];
+            
+            // Fills array with adjacent pieces from board. If adjacent spot
+            // is out of bounds, puts null instead.
+            if (y + 1 < dimension)
+            {
+                adjacents[0] = board[x][y + 1];
+            }
+            else 
+            {
+                adjacents[0] = null;
+            }
+            
+            if (x + 1 < dimension)
+            {
+                adjacents[1] = board[x + 1][y];
+            }
+            else 
+            {
+                adjacents[1] = null;
+            }
+            
+            if (y - 1 >= 0)
+            {
+                adjacents[2] = board[x][y - 1];
+            }
+            else 
+            {
+                adjacents[2] = null;
+            }
+            
+            if (x - 1 >= 0)
+            {
+                adjacents[3] = board[x - 1][y];
+            }
+            else 
+            {
+                adjacents[3] = null;
+            }
             stone.setAdjacent(adjacents);
             board[x][y] = stone;
                     
@@ -60,7 +96,6 @@ public class GoBoard
                 if (i.getColor() == -color && !(i.getHasLiberties()))
                 {
                     removeCapturedStones(i);
-                    enemiescaptured = true;
                 }
             }
             
