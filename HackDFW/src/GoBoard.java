@@ -3,6 +3,7 @@
  * Author: Michael Nelson
 */
 import java.util.*;
+import java.awt.*;
 public class GoBoard 
 {   
     private GoPiece[][] board;
@@ -15,6 +16,7 @@ public class GoBoard
     public GoBoard(int dimension)
     {
         board = new GoPiece[dimension][dimension];
+        // Populates board with empty stones
         for (int i = 0; i < dimension; i++)
         {
             for (int q = 0; q < dimension; q++)
@@ -25,14 +27,25 @@ public class GoBoard
     }
     
     
-    /* Places stone of desired color on desired location on the board.
+    /* Places stone of desired color on desired location on the board if
+     * position is unoccupied. Then checks if all stones adjacent to the placed
+     * stone have liberties. If not, the captured stones are removed. 
      * @param color - Color of stone.
-     * @param location - Location of stone placement.
+     * @param position - Desired position of stone.
+     * return whether or not stone was placed. 
     */
-    public void placeStone(GoPiece stone)
+    public boolean placeStone(int color, Point location)
     {
-        int x = stone.getPosition.getX();
-        int y = stone.getPosition.getY();
-        board[x][y] = stone;
+        
+    }
+    
+    
+    /* Removes all stones that have no liberties and are not capturing stones
+     * @param stone - The stone from which to recursively eliminate stones
+     * with no liberties
+    */
+    public void removeCapturedStones(GoPiece stone)
+    {
+        
     }
 }
