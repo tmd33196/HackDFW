@@ -23,7 +23,7 @@ public class HackDFW
             try{ size = sc.nextInt(); break; } //Try to get the next int
             catch(Exception e) { System.out.println("Please enter a number"); sc.nextLine(); } //If there was no int then try again
         }
-        System.out.printf("\n the size selected is: %d\n", size);
+        
         GoBoard board = new GoBoard(size); //Creates the game board
         Player[] players = { new Player(1, size), new Player(2, size) }; //The players in the game
         boolean passed = false; //If the last player passed
@@ -67,7 +67,7 @@ public class HackDFW
                 //Val 0 means the stone was placed successfully
                 if(val == 0)
                 {
-                    System.out.printf("Player 1 puts a piece at: %s\n", p.toString());
+                    System.out.printf("Player %d puts a piece at: %s\n", player + 1, p.toString());
                     passed = false;
                     player ++;
                 }

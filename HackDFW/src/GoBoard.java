@@ -50,9 +50,9 @@ public class GoBoard
             
             // Fills array with adjacent pieces from board. If adjacent spot
             // is out of bounds, puts null instead.
-            if (y + 1 < dimension)
+            if (y - 1 >= 0)
             {
-                adjacents[0] = board[x][y + 1];
+                adjacents[0] = board[x][y - 1];
             }
             else 
             {
@@ -68,9 +68,9 @@ public class GoBoard
                 adjacents[1] = null;
             }
             
-            if (y - 1 >= 0)
+            if (y + 1 < dimension)
             {
-                adjacents[2] = board[x][y - 1];
+                adjacents[2] = board[x][y + 1];
             }
             else 
             {
@@ -93,10 +93,15 @@ public class GoBoard
             // removed.
             for (GoPiece i: adjacents)
             {
-                i.updateLiberties();
-                if (i.getColor() == -color && !(i.getHasLiberties()))
+                if(i != null)
                 {
-                    removeCapturedStones(i);
+                    i.updateLiberties();
+                
+                    if (i.getColor() == -color && !(i.getHasLiberties()))
+                    {
+                        System.out.println("Removing " + i);
+                        removeCapturedStones(i);
+                    }
                 }
             }
             
@@ -143,7 +148,7 @@ public class GoBoard
         {
             for (int x = 0; x < dimension; x++)
             {
-                theBoard = theBoard + board[x][y] + " ";
+                theBoard = theBoard + board[x][y].getColor() + " ";
             }
             theBoard = theBoard + "\n";
         }

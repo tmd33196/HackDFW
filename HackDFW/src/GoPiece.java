@@ -62,6 +62,8 @@ public class GoPiece
     //Updates the liberties.  If any connected ally piece has a liberty then all have liberty
     public boolean updateLiberties()
     {
+        if(color == 0) return false;
+        System.out.println("Beginning of updateLiberties" + this.toString());
         checked = true; //This piece has been checked
         boolean adjacentLiberties = false; //If there are any adjacent liberties
         
@@ -71,15 +73,15 @@ public class GoPiece
             adjacentLiberties = true;
             setHasLiberties(adjacentLiberties);
         }
-        
+        System.out.println("After checking for null" + this.toString());
         //Loop through the 4 adjacent pieces
-        for(int a = 0; a < 4; a ++)
+        for(GoPiece piece: adjacent)
         {
-            GoPiece piece = adjacent[a]; //Sets a variable to the current adjacent piece
-        
+            //System.out.println("Adjacent to: " + this.toString() + " is: " + piece == null? "null": piece.toString());
             //If they are from the same player
             if(piece != null && piece.color == this.color)
             {
+                System.out.println("This piece is the same color: " + piece);
                 //If the piece has not been checked then call on that piece
                 if(!piece.checked)
                     adjacentLiberties |= piece.updateLiberties(); //boolean or with the return of the adjacent piece
@@ -96,7 +98,7 @@ public class GoPiece
     
     public String toString()
     {
-        return "" + color;
+        return position.toString() + " " + color + " " + hasLiberties;
     }
 
 }
