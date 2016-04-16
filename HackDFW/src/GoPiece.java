@@ -8,38 +8,32 @@ import java.awt.Point;
 public class GoPiece
 {
     
-    private GoPiece[] adjacent;
-    private Point position;
-    private boolean hasLiberties;
-    private int numLiberties;
-    private int color;
+    private GoPiece[] adjacent;     //Array of adjacent goPieces
+    private Point position;         //Position of the piece
+    private boolean hasLiberties;   //If the piece has any liberties
+    private int numLiberties;       //The number of liberties the piece has
+    private int color;              //The color of the piece
     
+    //Constructor that accepts a color and a position
     public GoPiece(int _color, Point _position)
     {
         color = _color;
         position = _position;
     }
     
-    public Point getPosition()
-    {
-        return position;
-    }
+    //Returns the position of the piece
+    public Point getPosition() { return position; }
     
-    public int getColor()
-    {
-        return color;
-    }
+    //Returns the color of the piece
+    public int getColor() { return color; }
     
-    public void setColor(int _color)
-    {
-        color = _color;
-    }
+    //Sets the color of the piece
+    public void setColor(int _color) { color = _color; }
     
-    public int getNumLiberties()
-    {
-        return numLiberties;
-    }
+    //Gets the number of liberties that this piece has
+    public int getNumLiberties() { return numLiberties; }
     
+    //Sets the number of liberties of the piece
     public void setNumLiberties(int _numLiberties)
     {
         numLiberties = _numLiberties;
@@ -47,14 +41,10 @@ public class GoPiece
             setHasLiberties(false);
     }
     
-    public void setHasLiberties(boolean _hasLiberties)
-    {
-        hasLiberties = _hasLiberties;
-    }
+    //Sets if there are any liberties left
+    public void setHasLiberties(boolean _hasLiberties) { hasLiberties = _hasLiberties; }
     
-    public boolean getHasLiberties()
-    {
-        return hasLiberties;
-    }
+    //Returns if there are any liberties
+    public boolean getHasLiberties() { return hasLiberties; }
 
 }
