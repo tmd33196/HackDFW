@@ -86,7 +86,7 @@ public class HackDFW
                 //Val 3 means Ko Rule was violated
                 else if (val == 3)
                 {
-                    System.out.println("Placing there violates ");
+                    System.out.println("Placing there violates Ko Rule");
                     continue;
                 }
             }

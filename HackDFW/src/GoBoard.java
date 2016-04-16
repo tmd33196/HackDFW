@@ -8,6 +8,7 @@ public class GoBoard
 {   
     private int dimension;
     private GoPiece[][] board;
+    private Stack<GoPiece[][]> positions;
     
     
     /* Constructor for GoBoard. Takes desired dimension and instantiates board;
@@ -37,6 +38,7 @@ public class GoBoard
      * @return 0 = Stone sucessfully placed.
      *         1 = Position occupied
      *         2 = Suicide rule violation
+     *         3 = Ko Rule violation
     */
     public int placeStone(int color, Point position)
     {
@@ -149,6 +151,14 @@ public class GoBoard
         return board;
     }
     
+    
+    /* Returns stack that records positions
+     * @return stack
+    */
+    public Stack<GoPiece[][]> getPositions()
+    {
+        return positions;
+    }
     
     /* Provides a string representation of the Go Board
      * @return the string representation of Go Board. 
