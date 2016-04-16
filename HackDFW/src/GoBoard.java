@@ -147,5 +147,6 @@ public class GoBoard
             }
             theBoard = theBoard + "\n";
         }
+        return theBoard;
     }
 }
