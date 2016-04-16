@@ -16,7 +16,7 @@ public class GoBoard
     */
     public GoBoard(int dimension)
     {
-        dimension = this.dimension;
+        this.dimension = dimension;
         board = new GoPiece[dimension][dimension];
         // Populates board with empty stones
         for (int i = 0; i < dimension; i++)

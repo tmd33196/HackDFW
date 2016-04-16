@@ -78,7 +78,7 @@ public class GoPiece
             GoPiece piece = adjacent[a]; //Sets a variable to the current adjacent piece
         
             //If they are from the same player
-            if(piece.color == this.color)
+            if(piece != null && piece.color == this.color)
             {
                 //If the piece has not been checked then call on that piece
                 if(!piece.checked)
@@ -92,6 +92,11 @@ public class GoPiece
         setHasLiberties(adjacentLiberties);
         checked = false;
         return adjacentLiberties;
+    }
+    
+    public String toString()
+    {
+        return "" + color;
     }
 
 }
