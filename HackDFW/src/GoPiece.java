@@ -8,7 +8,7 @@ import java.awt.Point;
 public class GoPiece
 {
     
-    private GoPiece[] adjacent;     //Array of adjacent goPieces
+    private GoPiece[] adjacent;     //Array of adjacent goPieces, [top, right, bottom, left]
     private Point position;         //Position of the piece
     private boolean hasLiberties;   //If the piece has any liberties
     private int numLiberties;       //The number of liberties the piece has
