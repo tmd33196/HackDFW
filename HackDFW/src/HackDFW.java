@@ -13,7 +13,7 @@ public class HackDFW
     {
         Scanner sc = new Scanner(System.in); //Scanner for user input
         int size; //The size of the board
-        Stack<GoPiece[][]> positions = new Stack<>();
+        
         //Prompt for user input
         System.out.print("Input the size of the board you would like: ");
         
