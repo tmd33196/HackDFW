@@ -37,7 +37,7 @@ public class Player
         while(true)
         {
             //Gets the row
-            System.out.print("Please enter the row you want the peice to be placed at: ");
+            System.out.print("Please enter the row you want the piece to be placed at: ");
             
             try{ p.x = sc.nextInt(); } //Try to get the int
             catch(Exception e) { System.out.println("Please enter a number"); sc.nextLine(); continue; } //If it wasn't an int go to the start of the loop
@@ -50,7 +50,7 @@ public class Player
             }
             
             //Gets the column
-            System.out.print("Please enter the column you want the peice to be placed at: ");
+            System.out.print("Please enter the column you want the piece to be placed at: ");
             
             try{ p.y = sc.nextInt(); } //Try to get the int
             catch(Exception e) { System.out.println("Please enter a number"); sc.nextLine(); continue; } //If it wasn't an int go to the start of the loop
