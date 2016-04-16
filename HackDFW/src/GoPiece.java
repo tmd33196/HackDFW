@@ -96,9 +96,26 @@ public class GoPiece
         return adjacentLiberties;
     }
     
+    
+    /* Returns string representation of Go Piece. "0" for empty, "B" for black
+     * and "W" for white.
+     * @return string representation of Go Piece
+     * Author: Michael Nelson
+    */
     public String toString()
     {
-        return position.toString() + " " + color + " " + hasLiberties;
+        if (color == 0)
+        {
+            return "0";
+        }
+        else if (color == 1)
+        {
+            return "B";
+        }
+        else
+        {
+            return "W";
+        }
     }
 
 }
