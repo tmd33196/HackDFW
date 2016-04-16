@@ -45,15 +45,18 @@ public class Player
             //Try to get the int
             try
             {
-                line = sc.nextLine();
+                line = sc.nextLine(); //Gets the next line
                 
+                //If the player says pass
                 if(line.trim().toLowerCase().equals(PASS))
                 {
+                    //Return null to indicate pass
                     System.out.printf("Player %d has passed their turn\n", playerNumber);
-                    return null;
+                    return null; 
                 }
                 else
                 {
+                    //Else try to get an integer value 
                     try { p.x = Integer.parseInt(line); }
                     catch(Exception e) { System.out.println("Please enter a number"); continue; } //If it wasn't an int go to the start of the loop
                 }
@@ -73,15 +76,18 @@ public class Player
             //Try to get the int
             try
             {
-                line = sc.nextLine();
+                line = sc.nextLine(); //Gets the next line
                 
+                //If the player says pass
                 if(line.trim().toLowerCase().equals(PASS))
                 {
+                    //Return null to indicate pass
                     System.out.printf("Player %d has passed their turn\n", playerNumber);
-                    return null;
+                    return null; 
                 }
                 else
                 {
+                    //Else try to get an integer value 
                     try { p.y = Integer.parseInt(line); }
                     catch(Exception e) { System.out.println("Please enter a number"); continue; } //If it wasn't an int go to the start of the loop
                 }
