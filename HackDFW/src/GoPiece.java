@@ -106,7 +106,7 @@ public class GoPiece
         {
             return "0";
         }
-        else if (color = 1)
+        else if (color == 1)
         {
             return "B";
         }
