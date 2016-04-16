@@ -52,6 +52,17 @@ public class GoPiece
     }
     
     
+    /* Sets the specific adjacent posiiton with desire value
+     * @param stone - The adjacent stone to be set
+     * @param key - Position in adjacent array the stone will be placed in
+     * Author: Michael Nelson
+    */
+    public void setSingleAdjacent(GoPiece stone, int key)
+    {
+        adjacent[key] = stone;
+    }
+    
+    
     /* Returns the array of adjacent Go Pieces
      * @return array of Go Pieces
      * Author: Michael Nelson
@@ -125,6 +136,24 @@ public class GoPiece
         else
         {
             return "W";
+        }
+    }
+    
+    
+    /* Overrides equals method inherited from Object
+     * @param stone - The GoPiece implicit parameter is compared to
+     * @return  0 = equal
+     *         -1 = not equal
+    */
+    public int equals(GoPiece stone)
+    {
+        if (position.equals(stone.position) && (color == stone.color))
+        {
+            return 0;
+        }
+        else
+        {
+            return -1;
         }
     }
 

@@ -9,6 +9,7 @@ public class GoBoard
     private int dimension;
     private GoPiece[][] board;
     private Stack<GoPiece[][]> positions;
+    private int movecount;
     
     
     /* Constructor for GoBoard. Takes desired dimension and instantiates board;
@@ -19,6 +20,8 @@ public class GoBoard
     {
         this.dimension = dimension;
         board = new GoPiece[dimension][dimension];
+        this.positions = new Stack<GoPiece[][]>();
+        movecount = 0;
         // Populates board with empty stones
         for (int i = 0; i < dimension; i++)
         {
@@ -27,6 +30,7 @@ public class GoBoard
                 board[i][q] = new GoPiece(0, new Point(i, q));
             }
         }
+        positions.push(board);
     }
     
     
@@ -56,6 +60,7 @@ public class GoBoard
             if (row - 1 >= 0)
             {
                 adjacents[0] = board[row - 1][col];
+                board[row - 1][col].setSingleAdjacent(stone, 2);
             }
             else 
             {
@@ -66,6 +71,7 @@ public class GoBoard
             if (col + 1 < dimension)
             {
                 adjacents[1] = board[row][col + 1];
+                board[row][col + 1].setSingleAdjacent(stone, 3);
             }
             else 
             {
@@ -76,6 +82,7 @@ public class GoBoard
             if (row + 1 < dimension)
             {
                 adjacents[2] = board[row + 1][col];
+                board[row + 1][col].setSingleAdjacent(stone, 0);
             }
             else 
             {
@@ -86,6 +93,7 @@ public class GoBoard
             if (col - 1 >= 0)
             {
                 adjacents[3] = board[row][col - 1];
+                board[row][col - 1].setSingleAdjacent(stone, 1);
             }
             else 
             {
@@ -99,10 +107,10 @@ public class GoBoard
             // removed.
             for (GoPiece i: adjacents)
             {
+                
                 if(i != null)
                 {
                     i.updateLiberties();
-                    
                     if (i.getColor() == -color && !(i.getHasLiberties()))
                     {
                         removeCapturedStones(i);
@@ -112,7 +120,29 @@ public class GoBoard
             stone.updateLiberties();
             if (stone.getHasLiberties())
             {
-                return 0;
+                if (movecount >= 3)
+                {
+                    GoPiece[][] previousstate = positions.pop();
+                    GoPiece[][] morepreviousstate = positions.pop();
+                    if (morepreviousstate != board)
+                    {
+                        positions.push(morepreviousstate);
+                        positions.push(previousstate);
+                        positions.push(board);
+                        movecount++;
+                        return 0;
+                    }
+                    else
+                    {
+                        return 3;
+                    }
+                }
+                else
+                {
+                    positions.push(board);
+                    movecount++;
+                    return 0;
+                }
             }
             else
             {
@@ -135,7 +165,7 @@ public class GoBoard
         GoPiece[] adjacents = stone.getAdjacents();
         for (GoPiece i: adjacents)
         {
-            if (i.getColor() == color)
+            if (i != null && i.getColor() == color)
             {
                 removeCapturedStones(i);
             }
@@ -175,16 +205,6 @@ public class GoBoard
             }
             theBoard = theBoard + "\n";
         }
-        theBoard += "\n";
-        for(int row = 0; row < dimension; row ++)
-        {
-            for (int col = 0; col < dimension; col++)
-            {
-                theBoard = theBoard + board[row][col].getHasLiberties() + " ";
-            }
-            theBoard = theBoard + "\n";
-        }
-        
         return theBoard;
     }
 }
