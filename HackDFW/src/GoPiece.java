@@ -11,7 +11,7 @@ public class GoPiece
     private GoPiece[] adjacent;     //Array of adjacent goPieces, [top, right, bottom, left]
     private Point position;         //Position of the piece
     private boolean hasLiberties;   //If the piece has any liberties
-    private int numLiberties;       //The number of liberties the piece has
+    private boolean checked;        //If the piece has been checking in updateLiberties
     private int color;              //The color of the piece
     
     //Constructor that accepts a color and a position
@@ -19,6 +19,9 @@ public class GoPiece
     {
         color = _color;
         position = _position;
+        
+        adjacent = new GoPiece[4];
+        hasLiberties = updateLiberties();
     }
     
     //Returns the position of the piece
@@ -29,17 +32,6 @@ public class GoPiece
     
     //Sets the color of the piece
     public void setColor(int _color) { color = _color; }
-    
-    //Gets the number of liberties that this piece has
-    public int getNumLiberties() { return numLiberties; }
-    
-    //Sets the number of liberties of the piece
-    public void setNumLiberties(int _numLiberties)
-    {
-        numLiberties = _numLiberties;
-        if (numLiberties == 0)
-            setHasLiberties(false);
-    }
     
     //Sets if there are any liberties left
     public void setHasLiberties(boolean _hasLiberties) { hasLiberties = _hasLiberties; }
@@ -55,6 +47,40 @@ public class GoPiece
     public void setAdjacent(GoPiece[] adjacents)
     {
         adjacent = adjacents;
+    }
+    
+    //Updates the liberties.  If any connected ally piece has a liberty then all have liberty
+    public boolean updateLiberties()
+    {
+        checked = true; //This piece has been checked
+        boolean adjacentLiberties = false; //If there are any adjacent liberties
+        
+        //If any of the adjacent pieces are null then this piece has a liberty
+        if(adjacent[0] == null || adjacent[1] == null || adjacent[2] == null || adjacent[3] == null)
+        {
+            adjacentLiberties = true;
+            setHasLiberties(adjacentLiberties);
+        }
+        
+        //Loop through the 4 adjacent pieces
+        for(int a = 0; a < 4; a ++)
+        {
+            GoPiece piece = adjacent[a]; //Sets a variable to the current adjacent piece
+        
+            //If they are from the same player
+            if(piece.color == this.color)
+            {
+                //If the piece has not been checked then call on that piece
+                if(!piece.checked)
+                    adjacentLiberties |= piece.updateLiberties(); //boolean or with the return of the adjacent piece
+                else //Else if has been checked, so just com
+                    adjacentLiberties |= piece.getHasLiberties();
+            }
+        }
+        
+        setHasLiberties(adjacentLiberties);
+        checked = false;
+        return adjacentLiberties;
     }
 
 }
