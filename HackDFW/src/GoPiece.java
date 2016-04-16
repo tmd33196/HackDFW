@@ -65,10 +65,11 @@ public class GoPiece
     public boolean updateLiberties()
     {
         if(color == 0) return false;
-        //System.out.println("Beginning of updateLiberties" + position + " " + this.toString() + " " + hasLiberties);
+        System.out.println("Beginning of updateLiberties" + position + " " + this.toString() + " " + hasLiberties);
         checked = true; //This piece has been checked
         boolean adjacentLiberties = false; //If there are any adjacent liberties
-        System.out.println(adjacent[0] + " | " + adjacent[1] + " | " + adjacent[2] + " | " + adjacent[3]);
+        setHasLiberties(adjacentLiberties);
+        
         //If any of the adjacent pieces are 0 then this piece has a liberty
         if((adjacent[0] != null && adjacent[0].getColor() == 0) 
                 || (adjacent[1] != null && adjacent[1].getColor() == 0) 
@@ -77,16 +78,19 @@ public class GoPiece
         {
             adjacentLiberties = true;
             setHasLiberties(adjacentLiberties);
+            System.out.println("\tFound adjacent empty piece"   + (adjacent[0] != null && adjacent[0].getColor() == 0) 
+                                                                + (adjacent[1] != null && adjacent[1].getColor() == 0) 
+                                                                + (adjacent[2] != null && adjacent[2].getColor() == 0) 
+                                                                + (adjacent[3] != null && adjacent[3].getColor() == 0));
         }
-        //System.out.println("After checking for null " + position + " " + this.toString() + " " + hasLiberties + adjacentLiberties);
+        
         //Loop through the 4 adjacent pieces
         for(GoPiece piece: adjacent)
         {
-            //System.out.println("Adjacent to: " + this.toString() + " is: " + piece == null? "null": piece.toString());
             //If they are from the same player
             if(piece != null && piece.color == this.color)
             {
-                System.out.println("This piece is the same color: " + piece.position + " " + piece.toString() + " " + piece.hasLiberties);
+                System.out.println("\tThis piece is the same color: " + piece.position + " " + piece.toString() + " " + piece.hasLiberties);
                 //If the piece has not been checked then call on that piece
                 if(!piece.checked)
                     adjacentLiberties |= piece.updateLiberties(); //boolean or with the return of the adjacent piece
@@ -94,12 +98,11 @@ public class GoPiece
                     adjacentLiberties |= piece.getHasLiberties();
             }
         }
-        //System.out.println("After loop " + position + " " + this.toString() + " " + hasLiberties);
+        
         //Set liberties, check is now false, returns
         setHasLiberties(adjacentLiberties);
         checked = false;
-        //System.out.println("End of method " + position + " " + this.toString() + " " + hasLiberties);
-        //System.out.println("The adjacentLiberties: " + adjacentLiberties);
+        System.out.println("End of updateLiberties " + position + " " + this.toString() + " " + hasLiberties);
         return adjacentLiberties;
     }
     

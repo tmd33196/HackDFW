@@ -188,6 +188,16 @@ public class GoBoard
             }
             theBoard = theBoard + "\n";
         }
+        theBoard += "\n";
+        for(int row = 0; row < dimension; row ++)
+        {
+            for (int col = 0; col < dimension; col++)
+            {
+                theBoard = theBoard + board[row][col].getHasLiberties() + " ";
+            }
+            theBoard = theBoard + "\n";
+        }
+        
         return theBoard;
     }
 }
