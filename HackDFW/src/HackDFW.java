@@ -77,10 +77,16 @@ public class HackDFW
                     System.out.println("That space is occupied, enter a new point");
                     continue;
                 }
-                //Val 2 meand the suicide rule was violated
+                //Val 2 means the suicide rule was violated
                 else if(val == 2)
                 {
                     System.out.println("Placing there violates the suicide rule");
+                    continue;
+                }
+                //Val 3 means Ko Rule was violated
+                else if (val == 3)
+                {
+                    System.out.println("Placing there violates ");
                     continue;
                 }
             }
