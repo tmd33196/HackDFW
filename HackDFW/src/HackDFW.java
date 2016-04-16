@@ -57,10 +57,25 @@ public class HackDFW
                 }
                 else
                 {
-                    //Place the stone on the board and set passed to false since a piece was placed
-                    board.placeStone(players[a].getPlayerNumber(), p);
-                    System.out.printf("Player 1 puts a piece at: %s\n", p.toString());
-                    passed = false;
+                    int val = board.placeStone(players[a].getPlayerNumber(), p);
+                    
+                    if(val == 0)
+                    {
+                        System.out.printf("Player 1 puts a piece at: %s\n", p.toString());
+                        passed = false;
+                    }
+                    else if(val == 1)
+                    {
+                        System.out.println("That space is occupied, enter a new point");
+                        a --;
+                        continue;
+                    }
+                    else if(val == 2)
+                    {
+                        System.out.println("Placing there violates the suicide rule");
+                        a --;
+                        continue;
+                    }
                 }
             }
         }
