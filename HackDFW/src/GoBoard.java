@@ -227,22 +227,27 @@ public class GoBoard
     //Attempts to score the game, returns the player number who won
     public int score()
     {
-        int[] scores = { 0, 0 };
-        Point score;
+        int[] scores = { 0, 0 }; //The two players scores
+        Point score; //The score point
         
+        //Loops through the array
         for(int a = 0; a < dimension; a ++)
         {
             for(int b = 0; b < dimension; b ++)
             {
+                //If it has not been checked and is empty
                 if(!board[a][b].isChecked() && board[a][b].getColor() == 0)
                 {
+                    //Call the getScore method
                     score = getScore(new Point(a, b), new Point(0, 0));
-                    System.out.println("getScore returned" + score + " from point " + a + " " + b);
+                    //System.out.println("getScore returned" + score + " from point " + a + " " + b);
+                    //If the score is valid
                     if(score.y > 0)
                     {
+                        //Assigne the score to the correct player
                         if(score.x == 1)
                             scores[0] += score.y;
-                        else if(score.y == -1)
+                        else if(score.x == -1)
                             scores[1] += score.y;
                     }
                 }
@@ -252,37 +257,52 @@ public class GoBoard
         System.out.println("Player 1 has a score of: " + scores[0]);
         System.out.println("Player 2 has a score of: " + scores[1]);
         
+        //Compares score and returns accordingly
         if(scores[0] > scores[1])
             return 0;
-        else
+        else if(scores[0] < scores[1])
             return 1;
+        else
+            return -1;
     }
     
     //Returns the score
     public Point getScore(Point pos, Point p)
     {
+        //Bounds checking
         if(pos.x >= 0 && pos.x < dimension && pos.y >= 0 && pos.y < dimension && !board[pos.x][pos.y].isChecked())
         {
+            //Gets the piece
             GoPiece piece = board[pos.x][pos.y];
-            piece.setChecked(true);
-            switch(board[pos.x][pos.y].getColor())
+            
+            //If it is an empty piece then mark it checked
+            if(piece.getColor() == 0) piece.setChecked(true);
+            //System.out.println("\t" + piece + " " + piece.getPosition());
+            //Switch on the color of the piece
+            switch(piece.getColor())
             {
+                //Piece is empty
                 case 0:
+                    //Increase the score and recursively call all surrounding
                     p.y += 1;
                     getScore(new Point(pos.x + 1, pos.y), p);
                     getScore(new Point(pos.x - 1, pos.y), p);
                     getScore(new Point(pos.x, pos.y + 1), p);
                     getScore(new Point(pos.x, pos.y - 1), p);
                     break;
+                //If it is either players
                 case 1:
                 case -1:
+                    //If this is the first color found, set x to it
                     if(p.x == 0)
                         p.x = piece.getColor();
+                    //If the color is different the previously found one then it is neutral
                     else if(piece.getColor() != p.x)
                         p.y = -1000;
                     break;
             }
         }
+        //Return the point
         return p;
     }
     

@@ -93,7 +93,10 @@ public class HackDFW
         }
         
         int playerWon = board.score();
-        System.out.println("Player " + (playerWon + 1) + " won!");
+        if(playerWon == -1)
+            System.out.println("Tie");
+        else
+            System.out.println("Player " + (playerWon + 1) + " won!");
         
     }
     
