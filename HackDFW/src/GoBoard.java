@@ -45,7 +45,7 @@ public class GoBoard
      *         3 = Ko Rule violation
     */
     public int placeStone(int color, Point position)
-    {
+    {         
         int row = (int)position.getX();
         int col = (int)position.getY();
         
@@ -124,6 +124,7 @@ public class GoBoard
                 {
                     GoPiece[][] previousstate = positions.pop();
                     GoPiece[][] morepreviousstate = positions.pop();
+                    
                     boolean equalarrays = true;
                     for (int y = 0; y < dimension; y++)
                     {
@@ -152,19 +153,19 @@ public class GoBoard
                 }
                 else
                 {
-                    positions.push(board);
-                        String theBoard = "";
-        //for (int y =  dimension - 1; y >= 0; y--)
-        for(int i = 0; i < dimension; i++)
-        {
-            for (int q = 0; q < dimension; q++)
-            {
-                theBoard = theBoard + (positions.peek())[i][q] + " ";
-            }
-            theBoard = theBoard + "\n";
-        }
+                    //positions.push(board);
+                    
+                    GoPiece[][] push = new GoPiece[dimension][dimension];
+                    
+                    for(int a = 0; a < dimension; a ++)
+                    {
+                        for(int b = 0; b < dimension; b ++)
+                        {
+                            push[a][b] = board[a][b];
+                        }
+                    }
+                    positions.push(push);
                     movecount++;
-                    System.out.println(theBoard);
                     return 0;
                 }
             }
@@ -220,7 +221,7 @@ public class GoBoard
     public String toString()
     {
         String theBoard = "";
-        //for (int y =  dimension - 1; y >= 0; y--)
+        
         for(int row = 0; row < dimension; row ++)
         {
             for (int col = 0; col < dimension; col++)
