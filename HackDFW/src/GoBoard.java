@@ -215,6 +215,68 @@ public class GoBoard
         return positions;
     }
     
+    //Attempts to score the game, returns the player number who won
+    public int score()
+    {
+        int[] scores = { 0, 0 };
+        Point score;
+        
+        for(int a = 0; a < dimension; a ++)
+        {
+            for(int b = 0; b < dimension; b ++)
+            {
+                if(!board[a][b].isChecked() && board[a][b].getColor() == 0)
+                {
+                    score = getScore(new Point(a, b), new Point(0, 0));
+                    System.out.println("getScore returned" + score + " from point " + a + " " + b);
+                    if(score.y > 0)
+                    {
+                        if(score.x == 1)
+                            scores[0] += score.y;
+                        else if(score.y == -1)
+                            scores[1] += score.y;
+                    }
+                }
+            }
+        }
+        
+        System.out.println("Player 1 has a score of: " + scores[0]);
+        System.out.println("Player 2 has a score of: " + scores[1]);
+        
+        if(scores[0] > scores[1])
+            return 0;
+        else
+            return 1;
+    }
+    
+    //Returns the score
+    public Point getScore(Point pos, Point p)
+    {
+        if(pos.x >= 0 && pos.x < dimension && pos.y >= 0 && pos.y < dimension && !board[pos.x][pos.y].isChecked())
+        {
+            GoPiece piece = board[pos.x][pos.y];
+            piece.setChecked(true);
+            switch(board[pos.x][pos.y].getColor())
+            {
+                case 0:
+                    p.y += 1;
+                    getScore(new Point(pos.x + 1, pos.y), p);
+                    getScore(new Point(pos.x - 1, pos.y), p);
+                    getScore(new Point(pos.x, pos.y + 1), p);
+                    getScore(new Point(pos.x, pos.y - 1), p);
+                    break;
+                case 1:
+                case -1:
+                    if(p.x == 0)
+                        p.x = piece.getColor();
+                    else if(piece.getColor() != p.x)
+                        p.y = -1000;
+                    break;
+            }
+        }
+        return p;
+    }
+    
     /* Provides a string representation of the Go Board
      * @return the string representation of Go Board. 
     */

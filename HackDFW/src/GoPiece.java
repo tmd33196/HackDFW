@@ -72,6 +72,16 @@ public class GoPiece
         return adjacent;
     }
     
+    public boolean isChecked()
+    {
+        return checked;
+    }
+    
+    public void setChecked(boolean c)
+    {
+        checked = c;
+    }
+    
     //Updates the liberties.  If any connected ally piece has a liberty then all have liberty
     public boolean updateLiberties()
     {
