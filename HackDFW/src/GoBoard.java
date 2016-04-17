@@ -124,7 +124,19 @@ public class GoBoard
                 {
                     GoPiece[][] previousstate = positions.pop();
                     GoPiece[][] morepreviousstate = positions.pop();
-                    if (morepreviousstate != board)
+                    boolean equalarrays = true;
+                    for (int y = 0; y < dimension; y++)
+                    {
+                        for (int x = 0; x < dimension; x++)
+                        {
+                            if (!(morepreviousstate[y][x].nonObjectEquals(board[y][x])))
+                            {
+                                equalarrays = false;
+                                break;
+                            }
+                        }
+                    }
+                    if (!equalarrays)
                     {
                         positions.push(morepreviousstate);
                         positions.push(previousstate);
@@ -134,13 +146,25 @@ public class GoBoard
                     }
                     else
                     {
+                        board[row][col] = new GoPiece(0, position);
                         return 3;
                     }
                 }
                 else
                 {
                     positions.push(board);
+                        String theBoard = "";
+        //for (int y =  dimension - 1; y >= 0; y--)
+        for(int i = 0; i < dimension; i++)
+        {
+            for (int q = 0; q < dimension; q++)
+            {
+                theBoard = theBoard + (positions.peek())[i][q] + " ";
+            }
+            theBoard = theBoard + "\n";
+        }
                     movecount++;
+                    System.out.println(theBoard);
                     return 0;
                 }
             }
