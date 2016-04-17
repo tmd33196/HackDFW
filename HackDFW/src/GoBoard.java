@@ -43,6 +43,7 @@ public class GoBoard
      *         1 = Position occupied
      *         2 = Suicide rule violation
      *         3 = Ko Rule violation
+     * Author: Tyler Davis
     */
     public int placeStone(int color, Point position)
     {         
