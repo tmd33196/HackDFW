@@ -141,7 +141,16 @@ public class GoBoard
                     {
                         positions.push(morepreviousstate);
                         positions.push(previousstate);
-                        positions.push(board);
+                        GoPiece[][] push = new GoPiece[dimension][dimension];
+                    
+                        for(int a = 0; a < dimension; a ++)
+                        {
+                            for(int b = 0; b < dimension; b ++)
+                            {
+                                 push[a][b] = board[a][b];
+                            }
+                        }
+                        positions.push(push);
                         movecount++;
                         return 0;
                     }
@@ -231,5 +240,24 @@ public class GoBoard
             theBoard = theBoard + "\n";
         }
         return theBoard;
+    }
+    
+    
+    /* Prints a string representation of the paramter
+     * @param stones - The 2-D array to be printed
+    */
+    public void print(GoPiece[][] stones)
+    {
+        String theBoard = "";
+        
+        for(int row = 0; row < dimension; row ++)
+        {
+            for (int col = 0; col < dimension; col++)
+            {
+                theBoard = theBoard + stones[row][col] + " ";
+            }
+            theBoard = theBoard + "\n";
+        }
+        System.out.println(theBoard);
     }
 }
