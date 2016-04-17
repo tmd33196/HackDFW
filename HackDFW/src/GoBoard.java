@@ -8,7 +8,7 @@ public class GoBoard
 {   
     private int dimension;
     private GoPiece[][] board;
-    private Stack<GoPiece[][]> positions;
+    private Stack<Point> positions;
     private int movecount;
     
     
@@ -20,7 +20,7 @@ public class GoBoard
     {
         this.dimension = dimension;
         board = new GoPiece[dimension][dimension];
-        this.positions = new Stack<GoPiece[][]>();
+        this.positions = new Stack<>();
         movecount = 0;
         // Populates board with empty stones
         for (int i = 0; i < dimension; i++)
@@ -30,7 +30,7 @@ public class GoBoard
                 board[i][q] = new GoPiece(0, new Point(i, q));
             }
         }
-        positions.push(board);
+        positions.push(new Point(-1, -1));
     }
     
     
@@ -48,9 +48,27 @@ public class GoBoard
     {         
         int row = (int)position.getX();
         int col = (int)position.getY();
+        boolean equal = false;
         
         if (board[row][col].getColor() == 0)
         {
+            if (movecount >= 3)
+            {
+                Point previousstate = positions.pop();
+                Point morepreviousstate = positions.pop();
+
+                equal = morepreviousstate.x == row && morepreviousstate.y == col;
+                if (!(equal))
+                {
+                    positions.push(morepreviousstate);
+                    positions.push(previousstate);
+                }
+                else
+                {
+                    return 3;
+                }
+            }
+            
             GoPiece stone = new GoPiece(color, position);
             GoPiece[] adjacents = new GoPiece[4];
             
@@ -99,6 +117,7 @@ public class GoBoard
             {
                 adjacents[3] = null;
             }
+            
             stone.setAdjacent(adjacents);
             board[row][col] = stone;
                     
@@ -107,7 +126,6 @@ public class GoBoard
             // removed.
             for (GoPiece i: adjacents)
             {
-                
                 if(i != null)
                 {
                     i.updateLiberties();
@@ -118,65 +136,12 @@ public class GoBoard
                 }
             }
             stone.updateLiberties();
+            
             if (stone.getHasLiberties())
             {
-                if (movecount >= 3)
-                {
-                    GoPiece[][] previousstate = positions.pop();
-                    GoPiece[][] morepreviousstate = positions.pop();
-                    
-                    boolean equalarrays = true;
-                    for (int y = 0; y < dimension; y++)
-                    {
-                        for (int x = 0; x < dimension; x++)
-                        {
-                            if (!(morepreviousstate[y][x].nonObjectEquals(board[y][x])))
-                            {
-                                equalarrays = false;
-                                break;
-                            }
-                        }
-                    }
-                    if (!equalarrays)
-                    {
-                        positions.push(morepreviousstate);
-                        positions.push(previousstate);
-                        GoPiece[][] push = new GoPiece[dimension][dimension];
-                    
-                        for(int a = 0; a < dimension; a ++)
-                        {
-                            for(int b = 0; b < dimension; b ++)
-                            {
-                                 push[a][b] = board[a][b];
-                            }
-                        }
-                        positions.push(push);
-                        movecount++;
-                        return 0;
-                    }
-                    else
-                    {
-                        board[row][col] = new GoPiece(0, position);
-                        return 3;
-                    }
-                }
-                else
-                {
-                    //positions.push(board);
-                    
-                    GoPiece[][] push = new GoPiece[dimension][dimension];
-                    
-                    for(int a = 0; a < dimension; a ++)
-                    {
-                        for(int b = 0; b < dimension; b ++)
-                        {
-                            push[a][b] = board[a][b];
-                        }
-                    }
-                    positions.push(push);
-                    movecount++;
-                    return 0;
-                }
+                positions.push(new Point(row, col));
+                movecount++;
+                return 0;
             }
             else
             {
@@ -219,7 +184,7 @@ public class GoBoard
     /* Returns stack that records positions
      * @return stack
     */
-    public Stack<GoPiece[][]> getPositions()
+    public Stack<Point> getPositions()
     {
         return positions;
     }
