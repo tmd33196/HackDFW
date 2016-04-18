@@ -27,7 +27,7 @@ public class GoBoard
         {
             for (int q = 0; q < dimension; q++)
             {
-                board[i][q] = new GoPiece(0, new Point(i, q));
+                board[i][q] = new GoPiece(0, new GoPoint(i, q));
             }
         }
         positions.push(new Point(-1, -1));
@@ -43,9 +43,9 @@ public class GoBoard
      *         1 = Position occupied
      *         2 = Suicide rule violation
      *         3 = Ko Rule violation
-     * Author: Tyler Davis
+     * Author: Michael Nelson, under the guidance of Tyler Davis
     */
-    public int placeStone(int color, Point position)
+    public int placeStone(int color, GoPoint position)
     {         
         int row = (int)position.getX();
         int col = (int)position.getY();
