@@ -11,21 +11,19 @@ public class HackDFW
 
     public static void main(String[] args) throws IOException
     {   
-        Scanner sc = new Scanner(System.in); //Scanner for user input
-        int size; //The size of the board
+        Scanner input = new Scanner(System.in);
+        int board_size;
         
-        //Prompt for user input
         System.out.print("Input the size of the board you would like: ");
         
-        //While still getting the input
         while(true)
         {
-            try{ size = sc.nextInt(); break; } //Try to get the next int
-            catch(Exception e) { System.out.println("Please enter a number"); sc.nextLine(); } //If there was no int then try again
+            try{ board_size = input.nextInt(); break; } //Try to get the next int //Try to get the next int //Try to get the next int //Try to get the next int
+            catch(Exception e) { System.out.println("Please enter a number"); input.nextLine(); } //If there was no int then try again //If there was no int then try again
         }
         
-        GoBoard board = new GoBoard(size); //Creates the game board
-        Player[] players = { new Player(1, size), new Player(2, size) }; //The players in the game
+        GoBoard board = new GoBoard(board_size); //Creates the game board
+        Player[] players = { new Player(1, board_size), new Player(2, board_size) }; //The players in the game
         boolean passed = false; //If the last player passed
         boolean gameOver = false; //If the game has ended
         int player = 0; //Indicates the players turn
@@ -39,7 +37,7 @@ public class HackDFW
             //Resets the player if it's too high
             if(player == 2) player = 0;
             
-            Point p; //The point where a player want to put a piece
+            GoPoint p; //The point where a player want to put a piece
             
             //Play the turn, returning the point the player wants to put a piece
             p = players[player].playTurn();
