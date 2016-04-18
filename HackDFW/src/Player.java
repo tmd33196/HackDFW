@@ -27,11 +27,11 @@ public class Player
     public int getPlayerNumber() { return playerNumber; }
     
     //Play their turn
-    public Point playTurn() throws IOException
+    public GoPoint playTurn() throws IOException
     {
         //Output who's turn it is
         System.out.printf("Player %d's turn: \n", playerNumber);
-        Point p = new Point(0, 0); //The point where the player wants to put a piece
+        GoPoint p = new GoPoint(0, 0); //The point where the player wants to put a piece
         String line; //The user inputed line
         
         Scanner sc = new Scanner(System.in); //Scanner for user input
