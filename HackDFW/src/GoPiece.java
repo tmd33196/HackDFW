@@ -5,17 +5,17 @@
 
 import java.awt.Point;
 
-public class GoPiece
+public class GoPiece 
 {
     
     private GoPiece[] adjacent;     //Array of adjacent goPieces, [top, right, bottom, left]
-    private Point position;         //Position of the piece
+    private GoPoint position;         //Position of the piece
     private boolean hasLiberties;   //If the piece has any liberties
     private boolean checked;        //If the piece has been checking in updateLiberties
     private int color;              //The color of the piece
     
     //Constructor that accepts a color and a position
-    public GoPiece(int _color, Point _position)
+    public GoPiece(int _color, GoPoint _position)
     {
         color = _color;
         position = _position;
@@ -27,7 +27,7 @@ public class GoPiece
     }
     
     //Returns the position of the piece
-    public Point getPosition() { return position; }
+    public GoPoint getPosition() { return position; }
     
     //Returns the color of the piece
     public int getColor() { return color; }
